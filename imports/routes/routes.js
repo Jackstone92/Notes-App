@@ -14,11 +14,13 @@ const onEnterPublicPage = () => {
     browserHistory.replace('/dashboard');
   }
 };
+
 const onEnterPrivatePage = () => {
   if (!Meteor.userId()) {
     browserHistory.replace('/');
   }
 };
+
 export const onAuthChange = (isAuthenticated) => {
   const pathname = browserHistory.getCurrentLocation().pathname;
   const isUnauthenticatedPage = unauthenticatedPages.includes(pathname);
@@ -30,11 +32,13 @@ export const onAuthChange = (isAuthenticated) => {
     browserHistory.replace('/');
   }
 };
+
 export const routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Login} onEnter={onEnterPublicPage}/>
     <Route path="/signup" component={Signup} onEnter={onEnterPublicPage}/>
     <Route path="/dashboard" component={Dashboard} onEnter={onEnterPrivatePage}/>
+    <Route path="/dashboard/:id" component={Dashboard} onEnter={onEnterPrivatePage}/>
     <Route path="*" component={NotFound}/>
   </Router>
 );
